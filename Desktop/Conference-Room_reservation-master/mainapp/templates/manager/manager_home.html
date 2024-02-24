@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3" style="background-color: rgba(95, 158, 160, 0.726);;">
+
+            <div class="container " style="background-color: rgba(95, 158, 160, 0.753);">
+
+                <div class="media borer  p-3" style="background-color: rgba(24, 141, 161, 0.767);">
+                    <img src="{% static 'images/administrator.png'%}" alt="John Doe" class="mr-3 mt-3 rounded-circle"
+                        style="width:60px;">
+                    <div class="media-body">
+                        <h4>{{ request.user.full_name}} <br><small><i>Manager : {{hall_in}}</i></small></h4>
+                        <h6>0792799958</h6>
+                    </div>
+                </div>
+
+                <h2>Quick Actions</h2>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Update Room Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Update Profile</a>
+                    </li>
+                    <li class="nav-item"> 
+                    <a class="nav-link" href="{% url 'reservation_new'%}">Book a boardroom</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                   
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-sm-9" style="background-color:lavnderblush;">
+            <h2 class="text-center">Current Reservations For {{ hall_in}}</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>User</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in reservations %}
+                    {% if r.is_current%}
+                    <tr>
+                        <td>{{r.title}}</td>
+                        <td>{{r.start_date_time}}</td>
+                        <td>{{r.end_date_time}}</td>
+                        <td>{{r.created_by}}</td>
+                        <td> {%if r.is_accepted%}
+                            <img src="{% static 'images/reschedule.png'%}" width="25" alt="">
+                            {% else%}
+                            <img src="{% static 'images/accept.png'%}" width="25" alt="">
+                            {% endif%}|
+                            <img src="{% static 'images/completee.png'%}" width="25" alt="">|
+                            <img src="{% static 'images/reschedule.png'%}" width="25" alt="">|
+                            <img src="{% static 'images/close.png'%}" width="25" alt="">
+                        </td>
+                    </tr>
+                    {% endif%}
+                    {% endfor%}
+                </tbody>
+            </table>
+
+            <div class="containr">
+                <div id="accordion">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                                Hall Details
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+                                Comming Soon!
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                Past Reservations
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse " data-parent="#accordion">
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Start</th>
+                                            <th>End</th>
+                                            <th>User</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for r in reservations %}
+                                        {% if r.is_complete%}
+                                        <tr>
+                                            <td>{{r.title}}</td>
+                                            <td>{{r.start_date_time}}</td>
+                                            <td>{{r.end_date_time}}</td>
+                                            <td>{{r.created_by}}</td>
+                                            <td><img src="{% static 'images/close.png'%}" width="25" alt=""></td>
+                                        </tr>
+                                        {% endif%}
+                                        {% endfor%}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+body {
+    background-image: url('munispyo.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.container {
+    width: 300px;
+    margin: 150px auto;
+    background-color: #ffffff33;
+    border: 1px solid #0000006e;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 20px;
+    width: 40%;
+}
+
+form {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+button[type="submit"] {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+.container.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 80% {
+        transform: translateX(5px);
+    }
+    30%, 50%, 70% {
+        transform: translateX(-5px);
+    }
+    40%, 60% {
+        transform: translateX(5px);
+    }
+}
